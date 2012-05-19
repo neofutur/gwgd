@@ -6,7 +6,7 @@
         <a href="<?php echo $casimir->base_url; ?>">Home</a> |
         <a href="<?php echo $casimir->base_url; ?>tools.php">Tools</a> |
         <a href="<?php echo $casimir->base_url; ?>stats.php#lastday">Stats</a> |
-        <a href="http://wiki.github.com/nhoizey/casimir">About Cas.im/ir</a>
+        <a href="https://github.com/neofutur/gwgd">About gwgd shortener</a>
       </p>
     </div>
     <?php
