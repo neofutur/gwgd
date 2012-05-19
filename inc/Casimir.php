@@ -322,7 +322,9 @@ class Casimir {
 
   // Only calling the head
   curl_setopt($ch, CURLOPT_HEADER, true); // header will be at output
-  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD'); // HTTP request is 'HEAD'
+  //curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD'); // HTTP request is 'HEAD'
+  curl_setopt($ch, CURLOPT_NOBODY, true);
+  curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, true);
 
   $content = curl_exec ($ch);
   curl_close ($ch);
