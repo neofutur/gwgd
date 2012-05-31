@@ -1,0 +1,41 @@
+
+ideas from tiny.cc
+
+Monitor traffic statistics
+tinyurl accounts Each Tiny URL has its own page for viewing traffic stats. No link to remember and no registration required, but you need to check mark "Log stats for this URL" when you create it. To bring up the stats page just add a tilde sign to the end of the Tiny URL and submit it in your browser's address bar . Follow the format of this example: http://tiny.cc/link_demo~
+Stats are logged by default for registered users. See Tools for more details about stats pages and link metrics.
+Preview links
+tinyurl preview Concerned about blindly clicking a Tiny URL due to chance of it hiding a virus, spyware or otherwise offensive material? Just add an equal sign to the end of any Tiny URL... as in this example: http://tiny.cc/link_demo= A preview page lets you safely see the address of that destination in its full, expanded form before actually visiting the site. Or a mouse-over this icon snapshot gives a snapshot of the destination page.
+Make a custom URL
+tinyurl preview If customurl box is left blank, the default link created will be 5 random characters. But you have the option of entering a keyword into this box to give the URL an alias or nickname (alpha-numeric characters, underscores, and dashes are allowed). Example, you are shortening a news article link and to make it easy to remember you enter "BBCnews" into the customurl box after pasting the long news article address into the box above it. The URL that results is http://tiny.cc/BBCnews.
+Custom URLs are case-sensitive - if you make it with capital letters it must be used with capitals. Also please note: there is a 25 character length limit for any custom URL... go beyond that and your link will not work as you expected. It will be cut-off at 25 characters!
+Accounts
+accounts If you made Tiny URLs but forgot to login first - it isn't too late to claim them. As long as URLs are still on the Tiny home page (in Recent URLs area), a login will pull them into your account.
+If you forgot your account password, we can't send it. They are stored using an encrypted algorithm. This means you would need to reset a password through our web site (click ? in upper right corner). To change your password or update your email address click "edit profile >>" on your Manage account page. To log out of your account click X in upper right corner.
+Edit Links
+tinyurl accounts Did your web page URL change? Click "Edit" to update either the long or short portion of the URL. Note: if you checked your updated link and the destination seems unchanged it is probably due to your browser's cache. A cache is used to make the browser appear to perform faster than it really does. Rather than verify if a URL has changed since its last use - the browser assumes it has not and grabs a previously written copy from your computer's local storage. In other words the link is working for other people who click it, but just not for you, until you clear your cache. Try clearing your browser cache and cookies
+QR Codes
+QR Codes To generate a QR Code from a newly made Tiny URL - click QR Code link on home page (Recent URLs) or alternately, append /qr to any previously made tiny.cc url. Tiny QR Codes are dynamic, meaning you can change the QR landing page anytime after the QR Code has been printed or distributed simply by editing of the destination URL from your tiny.cc account. How to generate qr codes for business cards. Also, Tiny makes it easy to manage all of your QR codes. Want to quickly find a link that is being used in a QR Code? Click Note tab and check box next to "Mark this URL as a QR Code", then click Update Note. After that you will always see a QR Code icon next to this URL - making it easy to identify any QR Code URLs in your account.
+Referrers
+This is a click statistic that tells you exactly where your traffic came from. No more guess work. Your account will display a top 10 list of websites where visitors found and clicked your Tiny links.
+Not seeing referrers for your tiny URLs? This option is available only to registered users and you must enable referrer tracking in your profile before it will function. To enable or disable referrer tracking go to your account Manage page and click on edit profile >>
+Traffic filter
+tinyurl Traffic Filter Login to apply a custom traffic filter to any of your links.
+Example 1: marketing aimed exclusively at users of mobile devices in the United Kingdom. The easiest filter set-up would be: checkbox "GB" under locations, "Mobile" under operating systems and "Include Only" - then click Add filter.
+Example 2: prevent traffic from China and France from clicking your link. Rather than marking all countries except CN and FR... simply checkbox CN, FR and "Block" - then click Add filter.
+Is your marketing campaign meant for certain languages or otherwise geotargeted? This means you might be wasting autoresponder resources, losing affiliate sales or time spent weeding out prospects. Decide who sees your link by adding customized web filtering. Traffic filter doesn't give you any extra clicks then your promotions normally generate, it simply filters the visitors.
+Notes
+tinyurl Notes A searchable tag feature is available for managing and archiving URLs. The complete, long URL can always be seen on Manage page by mousing over it, but for times when that is not enough, use Notes and add a short comment to serve as an additional reminder. The Note icon will appear darker if URL contains a note or tag and mouse-over will display its content. In addition it is integrated with Search, so you could add a special tag to effectively group urls into folders. Doing a search for that tag will then return all the urls in that group. See "Search your account" below.
+Search your account
+search The latest link that you make will be found at the top of the list when you login to Manage. Looking back for a specific URL and don't want to dig through every link in your account? No problem, just do a quick search. If you can remember something about the long (or destination) URL just type it into the Search box that says: "enter search terms then hit Enter key" It also searches Notes at the same time, so be aware that your results can possibly have a mixture of terms from both URLs and Notes. If you are trying to group URLs, an easy way to keep them separated and avoid confusing results is by using unusual tags (in other words unique terms that are unlikely to be found in any of your links).
+Link expiration
+301works Our short links use search engine friendly 301 forwarding recommended by Google, Microsoft and Yahoo. They are permanent redirects that never expire. Concerned about our links working forever? Tiny.cc is a member of 301works for 3rd party, long-term archiving of our shortened URLs.
+Export your links
+CSV Download links from your account. Includes the short and long URLs. Clicks stats for a specific short URL can be downloaded from its stats page by clicking the export link located below charts.
+Bookmarklet
+bookmarklet Have instant access to one-click link shortening anywhere you go on the internet! See Tools for details.
+Facebook links
+facebook app Facebook automatically adds a bit of code to links used with apps or for other postings: ( ?ref=... ) These are "referral tags" and have proven tricky with short urls in the past. But no worries, tiny.cc will handle them correctly.
+Share links
+Share tinyurl One click to email or send to your favorite website. Roll your mouse over "Share" and a list of choices will pop-up, click the one you want or search if you don't see it (after that it remembers your favorites). One click will send the Tiny URL to your chosen site or email client. Note: if using this option to send links directly to Twitter it will result in a Twitter/bit.ly "warning", which is Twitter's method of filtering 3rd party shortening services. The only work around is direct submission of tiny.cc links. 
+
