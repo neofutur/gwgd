@@ -335,5 +335,36 @@ class Casimir {
 else return "";
 
   }
+function print_gzipped_page() {
+
+    $HTTP_ACCEPT_ENCODING=$_SERVER["HTTP_ACCEPT_ENCODING"];
+
+//    echo "|$HTTP_ACCEPT_ENCODING|";exit;
+    if( headers_sent() ){
+        $encoding = false;
+    }elseif( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ){
+        $encoding = 'x-gzip';
+    }elseif( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ){
+        $encoding = 'gzip';
+    }else{
+        $encoding = false;
+    }
+//echo "|$encoding|"; exit;
+    if( $encoding ){
+        $contents = ob_get_contents();
+        ob_end_clean();
+        header('Content-Encoding: '.$encoding);
+        print("\x1f\x8b\x08\x00\x00\x00\x00\x00");
+        $size = strlen($contents);
+        $contents = gzcompress($contents, 9);
+        $contents = substr($contents, 0, $size);
+        print($contents);
+        exit();
+    }else{
+        ob_end_flush();
+        exit();
+    }
+}
+
 }
 ?>
