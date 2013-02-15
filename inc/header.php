@@ -4,6 +4,8 @@
 
 <head>
 	<title><?php echo TITLE ; ?> </title>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+
 	<link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
   <?php
   if (file_exists('user/screen.css')) {
