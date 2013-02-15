@@ -271,9 +271,8 @@ class Casimir {
       if ( $fh )
       {
        $newstr=@fread($fh, 100);  // read 100 more characters, until we find the title
-       $newstr2 = htmlentities ($newstr, ENT_QUOTES, 'UTF-8');
        //echo $newstr2;exit;
-       $str = $newstr2.strtolower($newstr2);
+       $str = $newstr.strtolower($newstr);
        if (@strpos($str,"</title>",$count) )
        {
         $found =  true;
@@ -292,7 +291,7 @@ class Casimir {
     {
      $start = strpos($str2, "<title>")+7;
      $len   = strpos($str2, "</title>") - $start;
-     return trim( substr($str, $start, $len));
+     return trim( htmlentities (substr($str, $start, $len), ENT_QUOTES, 'UTF-8'));
     }
     else 
     {
