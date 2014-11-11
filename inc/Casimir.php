@@ -116,25 +116,43 @@ class Casimir {
       return false;
     }
   }
-  
+
+  function blacklisted($longshort )
+  {
+   // first the regexp for spammers
+   //$regexpspammer="/[a-zA-Z]{1,30}[0-9]{4,6}$/";
+   $regexpspammer=SPAMREGEXP;
+   if ( preg_match($regexpspammer, $longshort ) ) return true;
+
+   // then the list of blacklisted words
+   //$blacklisted = array('porn','hack','crack','cheat','diet','seo','pills','casino','forsale','promotion','sexy','victoriamilan','internalservererror','funactivities','bodycomposition','verycute','m88','purchase','forex','surgery','weight-loss','weightloss','fitness','gamble','lottery','linkschwartz','buya','homesecurity','bigmuscles','dondecomprar','diabete','forfree','calvinklein','hotels','carinsurance','attorney','coupon','testosterone','luxury','rental','cheap','discount','promo','timberland','nike','cosmetic','ushud','followers' );
+   //   ,'' ,''  ,''   
+   $blacklistwords = unserialize(BLACKLISTWORDS);
+   foreach($blacklistwords as $filter) 
+   {
+    $pass = strpos($longshort, $filter) === false;
+    if(!$pass) return true;
+   }
+
+   return false;
+  }
+
   function addUrl($long, $short = '') {
     $long = trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $long) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
     if ($long == '') {
       return array(false, '', 'You must at least enter a long URL!');
-    } elseif (!preg_match("#^https?://#", $long)) {
-      return array(false, '', 'Your URL must start with either "http://" or "https://"!');
-    } elseif (substr($long, 0, strlen($this->base_url)) == $this->base_url) {
-      return array(false, '', 'This is already a shorten URL!');
-    } elseif ( GETHEAD == "yes") {
-      if ( ! $this->GetUrlHttpHead($long) ) return array(false, '', 'Can t reach this URL, please try again');
-    }
+    } elseif (!preg_match("#^https?://#", $long)) { return array(false, '', 'Your URL must start with either "http://" or "https://"!'); }
+    elseif (substr($long, 0, strlen($this->base_url)) == $this->base_url) { return array(false, '', 'This is already a shorten URL!'); }
+    elseif ( $this->blacklisted($long)) { return array(false, '', 'we wont create that link, sorry!'); }
+    elseif ( GETHEAD == "yes") { if ( ! $this->GetUrlHttpHead($long) ) return array(false, '', 'Can t reach this URL, please try again'); }
 
     $existing_short = $this->getShort($long);
     $short = trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $short) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
     if ($short != '') {
     	if (!preg_match("#^[a-zA-Z0-9_-]+$#", $short)) {
-        return array(false, '', 'This short URL is not authorized!');
-    	} elseif (strlen($short) > 50) {
+        return array(false, '', 'This short URL is not authorized!'); }
+	elseif( $this->blacklisted($short) ) { return array(false, '', 'we wont create that link, sorry!'); }
+	elseif (strlen($short) > 50) {
         return array(false, '', 'This short URL is not short enough! Hint: 50 chars allowed...');
     	}
     }

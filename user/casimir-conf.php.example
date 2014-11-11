@@ -22,7 +22,13 @@ define('DEFAULT_API_FORMAT', 'text');
 // bigger stats size 
 define('HISTSIZEX', '3' );
 // Site title
-define('TITLE', 'Cas.im/ir - Yet Another URL Shortener' );
+define('TITLE', 'gw.gd - Yet Another URL Shortener' );
 // site name
-define('NAME', 'Cas.im/ir' );
+define('NAME', 'gw.gd' );
+
+/regexp antispam
+define('SPAMREGEXP', '/[a-zA-Z]{1,30}[0-9]{4,6}$/');
+//blacklist antispam
+define('BLACKLISTWORDS', serialize(array('porn','hack','crack','cheat','diet','seo','pills','casino','forsale','promotion','sexy','victoriamilan','internalservererror','funactivities','bodycomposition','verycute','m88','purchase','forex','surgery','weight-loss','weightloss','fitness','gamble','lottery','linkschwartz','buya','homesecurity','bigmuscles','dondecomprar','diabete','forfree','calvinklein','hotels','carinsurance','attorney','coupon','testosterone','luxury','rental','cheap','discount','promo','timberland','nike','cosmetic','ushud','followers' )));
+
 ?>
