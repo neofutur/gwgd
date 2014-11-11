@@ -1,3 +1,4 @@
+
 <?php
 class Casimir {
   public $version;
@@ -11,8 +12,8 @@ class Casimir {
 	function __construct() 
 	{
 	  $this->version = '1.1';
-	  mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD) or die('Could not connect to database');
-	  mysql_select_db(MYSQL_DATABASE) or die('Could not select database');
+	  ($GLOBALS["___mysqli_ston"] = mysqli_connect(MYSQL_HOST,  MYSQL_USER,  MYSQL_PASSWORD)) or die('Could not connect to database');
+	  ((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . constant('MYSQL_DATABASE'))) or die('Could not select database');
 	  $current_dir = dirname($_SERVER['PHP_SELF']);
 	  if ($current_dir == '/') $current_dir = '';
 	  $this->base_url = 'http://'.$_SERVER['SERVER_NAME'].$current_dir.'/';
@@ -32,7 +33,7 @@ class Casimir {
   function handleRequest() 
   {
 	if (preg_match("#^.*/\??([^=]+)$#i", $_SERVER['REQUEST_URI'], $regs)) {
-	  $this->short = mysql_real_escape_string($regs[1]);
+	  $this->short = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $regs[1]) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 	} else {
 	  $this->short = '';
 	}
@@ -95,10 +96,10 @@ class Casimir {
   }
   
   function getShort($long) {
-    $q = 'SELECT short_url FROM casimir WHERE long_url="'.trim(mysql_real_escape_string($long)).'" ORDER BY creation_date DESC LIMIT 0,1';
-    $result = mysql_query($q);
-    if (mysql_num_rows($result)) {
-      $row = mysql_fetch_array($result);
+    $q = 'SELECT short_url FROM casimir WHERE long_url="'.trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $long) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))).'" ORDER BY creation_date DESC LIMIT 0,1';
+    $result = mysqli_query($GLOBALS["___mysqli_ston"], $q);
+    if (mysqli_num_rows($result)) {
+      $row = mysqli_fetch_array($result);
       return $row['short_url'];
     } else {
       return false;
@@ -106,10 +107,10 @@ class Casimir {
   }
 
   function getLong($short) {
-    $q = 'SELECT long_url FROM casimir WHERE short_url="'.trim(mysql_real_escape_string($short)).'"';
-    $result = mysql_query($q);
-    if (mysql_num_rows($result)) {
-      $row = mysql_fetch_array($result);
+    $q = 'SELECT long_url FROM casimir WHERE short_url="'.trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $short) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))).'"';
+    $result = mysqli_query($GLOBALS["___mysqli_ston"], $q);
+    if (mysqli_num_rows($result)) {
+      $row = mysqli_fetch_array($result);
       return $row['long_url'];
     } else {
       return false;
@@ -117,7 +118,7 @@ class Casimir {
   }
   
   function addUrl($long, $short = '') {
-    $long = trim(mysql_real_escape_string($long));
+    $long = trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $long) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
     if ($long == '') {
       return array(false, '', 'You must at least enter a long URL!');
     } elseif (!preg_match("#^https?://#", $long)) {
@@ -129,7 +130,7 @@ class Casimir {
     }
 
     $existing_short = $this->getShort($long);
-    $short = trim(mysql_real_escape_string($short));
+    $short = trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $short) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
     if ($short != '') {
     	if (!preg_match("#^[a-zA-Z0-9_-]+$#", $short)) {
         return array(false, '', 'This short URL is not authorized!');
@@ -143,7 +144,7 @@ class Casimir {
      if ( GETTITLE  == "yes")
      {
       
-      $this->title_page = trim(mysql_real_escape_string($this->GetUrlHtmlTitle($long)));
+      $this->title_page = trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $this->GetUrlHtmlTitle($long)) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
       $withtitle=' with title :<br /><a> "'.stripslashes($this->title_page).' </a>"';
      }
      else $withtitle=' with no title ';
@@ -152,7 +153,7 @@ class Casimir {
     {
      if ( GETTITLE  == "yes")
      {
-      $this->title_page = trim(mysql_real_escape_string($this->GetUrlHtmlTitle($long)));
+      $this->title_page = trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $this->GetUrlHtmlTitle($long)) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
       $withtitle=' with title :<br /><a> "'.stripslashes($this->title_page).' </a>"';
      }
      else $withtitle=' with no title ';
@@ -168,11 +169,11 @@ class Casimir {
 	      $short = $this->getRandomShort();
 	      
 	      $query = 'INSERT INTO casimir (short_url, long_url, creation_date, title_url ) VALUES ("'.$short.'", "'.$long.'", NOW(), \''. $this->title_page ."' )";
-	      if (mysql_query($query)) {
+	      if (mysqli_query($GLOBALS["___mysqli_ston"], $query)) {
 	        $short_url = $this->base_url.(USE_REWRITE ? '' : '?').$short;
 	        return array(true, $short, 'Congratulations, you created this new short URL:<br /><a href="'.$short_url.'">'.$short_url.'</a>'.$withtitle);
 	      } else {
-	        return array(false, $short, 'Something went wrong: '.mysql_error());
+	        return array(false, $short, 'Something went wrong: '.((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 	      }
     		break;
     	case ($short != '' && $existing_long && $long == $existing_long):
@@ -184,21 +185,21 @@ class Casimir {
     		break;
     	case ($short != '' && !$existing_short):
 	      $query = 'INSERT INTO casimir (short_url, long_url, creation_date, title_url ) VALUES ("'.$short.'", "'.$long.'", NOW(), \''. $this->title_page ."' )";
-        if (mysql_query($query)) {
+        if (mysqli_query($GLOBALS["___mysqli_ston"], $query)) {
           $short_url = $this->base_url.(USE_REWRITE ? '' : '?').$short;
 	        return array(true, $short, 'Congratulations, you created this new short URL:<br /><a href="'.$short_url.'">'.$short_url.'</a>'.$withtitle);
         } else {
-          return array(false, $short, 'Something went wrong: '.mysql_error());
+          return array(false, $short, 'Something went wrong: '.((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
         }
     		break;
     	case ($short != '' && !$existing_long):
     		// Same as previous???
 	      $query = 'INSERT INTO casimir (short_url, long_url, creation_date, title_url ) VALUES ("'.$short.'", "'.$long.'", NOW(), \''. $this->title_page."' )";
-        if (mysql_query($query)) {
+        if (mysqli_query($GLOBALS["___mysqli_ston"], $query)) {
           $short_url = $this->base_url.(USE_REWRITE ? '' : '?').$short;
 	        return array(true, $short, 'Congratulations, you created this new short URL:<br /><a href="'.$short_url.'">'.$short_url.'</a>'.$withtitle);
         } else {
-          return array(false, $short, 'Something went wrong: '.mysql_error());
+          return array(false, $short, 'Something went wrong: '.((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
         }
      		break;
  		}
@@ -216,21 +217,21 @@ class Casimir {
   }
   
   function updateUses($short) {
-    $query = "INSERT INTO casimir_stats (short_url, use_date) VALUES ('".trim(mysql_real_escape_string($short))."', NOW())";
-    mysql_query($query);
-    $query = "UPDATE casimir SET last_use_date=NOW(), uses=uses+1 WHERE short_url='".trim(mysql_real_escape_string($short))."'";
-    return mysql_query($query);
+    $query = "INSERT INTO casimir_stats (short_url, use_date) VALUES ('".trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $short) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")))."', NOW())";
+    mysqli_query($GLOBALS["___mysqli_ston"], $query);
+    $query = "UPDATE casimir SET last_use_date=NOW(), uses=uses+1 WHERE short_url='".trim(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $short) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")))."'";
+    return mysqli_query($GLOBALS["___mysqli_ston"], $query);
   }
   	
   function getMostUsedSinceDate($since = '1970-01-01 00:00:01', $nb = 10 ) {
     // should add caching here, https://github.com/neofutur/bitcoin_simple_php_tools/blob/master/lib/cacheticker.php
     $nb = $nb * HISTSIZEX ;
-    $query = "SELECT s.short_url, COUNT(*) AS uses, c.long_url, c.title_url FROM casimir_stats s, casimir c WHERE s.short_url = c.short_url AND use_date >= '".mysql_real_escape_string($since)."' GROUP BY s.short_url ORDER BY uses DESC LIMIT 0,".max(1,intval($nb));
-    if ($res = mysql_query($query)) {
+    $query = "SELECT s.short_url, COUNT(*) AS uses, c.long_url, c.title_url FROM casimir_stats s, casimir c WHERE s.short_url = c.short_url AND use_date >= '".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $since) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."' GROUP BY s.short_url ORDER BY uses DESC LIMIT 0,".max(1,intval($nb));
+    if ($res = mysqli_query($GLOBALS["___mysqli_ston"], $query)) {
 	    $list = '<dl>';
 	    $rank = 1;
 
-	    while ($url = mysql_fetch_assoc($res)) {
+	    while ($url = mysqli_fetch_assoc($res)) {
 	    	$list .= '<dt> #'. $rank .' - <a href="'.$url['short_url'].'" rel="nofollow" >'.$url['short_url'].'</a> visited '.$url['uses'].' time(s), link to : <a href="'.$url['long_url'].'">'.htmlspecialchars($url['long_url']).'</a> </dt>';
 		if ( GETTITLE == "yes" ) $list .= "<dd> with title : ".stripslashes($url['title_url'])." </dd> ";
 //        $list .= '<dd><a href="'.$url['long_url'].'">'.htmlspecialchars($url['long_url']).'</a></dd>';
@@ -338,18 +339,22 @@ else return "";
   }
 function print_gzipped_page() {
 
-    $HTTP_ACCEPT_ENCODING=$_SERVER["HTTP_ACCEPT_ENCODING"];
+    if ( isset ( $_SERVER["HTTP_ACCEPT_ENCODING"] ) )
+    {
+     $HTTP_ACCEPT_ENCODING=$_SERVER["HTTP_ACCEPT_ENCODING"];
 
-//    echo "|$HTTP_ACCEPT_ENCODING|";exit;
-    if( headers_sent() ){
+     if( headers_sent() ){
         $encoding = false;
-    }elseif( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ){
+     }elseif( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ){
         $encoding = 'x-gzip';
-    }elseif( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ){
+     }elseif( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ){
         $encoding = 'gzip';
-    }else{
+     }else{
         $encoding = false;
+     }
     }
+    else $encoding = false;
+
 //echo "|$encoding|"; exit;
     if( $encoding ){
         $contents = ob_get_contents();
