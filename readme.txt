@@ -31,3 +31,7 @@ the configuration settings ( + new option for getting the page title )
 
 "!http://api.coderwall.com/neofutur/endorsecount.png!":http://coderwall.com/neofutur
 
+WARNING :
+We strongly recommend to hide the stats.php page behind a htaccess or you will get thousand of 
+black hat SEO shit url spammers and thousands of requests to your shortener to get a few silly backlinks for malware websites or worst
+
