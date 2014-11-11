@@ -35,3 +35,11 @@ WARNING :
 We strongly recommend to hide the stats.php page behind a htaccess or you will get thousand of 
 black hat SEO shit url spammers and thousands of requests to your shortener to get a few silly backlinks for malware websites or worst
 
+    AuthUserFile /path/to/htpasswd
+    AuthName "stats are not for spammers"
+    AuthType Basic
+    <Files "stats.php">
+      require valid-user
+    </Files>
+    
+
