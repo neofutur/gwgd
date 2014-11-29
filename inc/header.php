@@ -1,11 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title><?php echo TITLE ; ?> </title>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-
+	<title><?php echo INSTANCE_NAME; ?></title>
 	<link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
   <?php
   if (file_exists('user/screen.css')) {
@@ -16,7 +13,5 @@
 </head>
 
 <body onload="document.getElementById('long').focus();">
-	<?php include("user/perso.php"); ?>
 	<div id="main">
-		<h1><a href="<?php echo $casimir->base_url; ?>"> <?php echo NAME ; ?></a></h1>
-		<h2> <?php echo TITLE ; ?></h2>
+		<h1><a href="<?php echo $casimir->base_url; ?>"><?php echo INSTANCE_NAME; ?></a></h1>

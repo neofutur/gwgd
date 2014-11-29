@@ -1,8 +1,5 @@
 <?php
-ob_start();
-ob_implicit_flush(0);
-
-require_once 'user/casimir-conf.php';
+require_once 'inc/conf.php';
 require_once 'inc/Casimir.php';
 $casimir = new Casimir();
 $casimir->handleRequest();
@@ -33,6 +30,4 @@ switch($format) {
     echo '</casimir>';
     break;
 }
-$casimir->print_gzipped_page();
-
 ?>

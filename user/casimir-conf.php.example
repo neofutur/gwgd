@@ -1,4 +1,7 @@
 <?php
+// Instance name
+define('INSTANCE_NAME', 'Cas.im/ir');
+
 // MySQL connection
 define('MYSQL_HOST', 'localhost');
 define('MYSQL_USER', 'root');
@@ -11,24 +14,18 @@ define('USE_REWRITE', false);
 // restrict access?
 define('ACCESS_KEY', '');
 
-// verify if the URL exists?
-define('GETHEAD', 'yes');
-
-// Get the linked page title?
-define('GETTITLE', 'yes');
-  
 // Default API format ('text' or 'xml')
 define('DEFAULT_API_FORMAT', 'text');
-// bigger stats size 
-define('HISTSIZEX', '3' );
-// Site title
-define('TITLE', 'gw.gd - Yet Another URL Shortener' );
-// site name
-define('NAME', 'gw.gd' );
 
-/regexp antispam
-define('SPAMREGEXP', '/[a-zA-Z]{1,30}[0-9]{4,6}$/');
-//blacklist antispam
-define('BLACKLISTWORDS', serialize(array('porn','hack','crack','cheat','diet','seo','pills','casino','forsale','promotion','sexy','victoriamilan','internalservererror','funactivities','bodycomposition','verycute','m88','purchase','forex','surgery','weight-loss','weightloss','fitness','gamble','lottery','linkschwartz','buya','homesecurity','bigmuscles','dondecomprar','diabete','forfree','calvinklein','hotels','carinsurance','attorney','coupon','testosterone','luxury','rental','cheap','discount','promo','timberland','nike','cosmetic','ushud','followers' )));
-
-?>
+// Use reCAPTCHA service to block spam bots
+// Please note that this will disable Casimir API
+// Also note that allow_url_fopen and json_encode are required
+define('RECAPTCHA', false);
+// Use SSL to validate reCAPTCHA response. It's the preferred method
+// since it's more secure to transmit your private key, but may require
+// additional PHP dependencies
+define('RECAPTCHA_HTTPS', true);
+// Your reCaptcha public key as provided by recaptcha.net
+define('RECAPTCHA_KEY', 'your-public-key');
+// Your reCaptcha secret key as provided by recaptcha.net
+define('RECAPTCHA_SECRET', 'your-private-key');
